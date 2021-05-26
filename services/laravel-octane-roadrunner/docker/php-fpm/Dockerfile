@@ -1,4 +1,4 @@
-FROM php:8.0-fpm-alpine
+FROM php:8.0-alpine
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
@@ -10,5 +10,5 @@ RUN apk --no-cache add \
     curl \
     && docker-php-ext-install \
     opcache \
-    sockets
-#    swoole
+    sockets \
+    pcntl
