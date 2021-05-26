@@ -1,0 +1,39 @@
+version: "3"
+
+networks:
+    traefik-octane-test-proxy:
+        external: true
+    laravel-octane-nginx-network:
+
+services:
+    nginx:
+        image: nginx:alpine
+        container_name: laravel-octane-nginx
+        working_dir: /app
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.laravel-octane-nginx.rule=Host(`laravel-octane.local`)"
+            - "traefik.http.routers.laravel-octane-nginx.entrypoints=http"
+        networks:
+            - traefik-octane-test-proxy
+            - laravel-octane-nginx-network
+        volumes:
+            - ./:/app
+            - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        expose:
+            - 80
+
+    laravel-octane-php-fpm-nginx:
+        build:
+            context: .
+            dockerfile: ./docker/php-fpm/Dockerfile
+        container_name: container-laravel-octane-php-fpm-nginx
+        working_dir: /app
+        tty: true
+        networks:
+            - laravel-octane-nginx-network
+        expose:
+            - 9000
+        volumes:
+            - ./:/app
+            - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
