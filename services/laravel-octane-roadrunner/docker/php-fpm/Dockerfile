@@ -9,6 +9,20 @@ RUN apk --no-cache add \
     git \
     curl \
     && docker-php-ext-install \
-    opcache \
     sockets \
     pcntl
+
+#####################################
+# USER
+#####################################
+ARG USER_NAME=test
+ARG USER_HOME_NAME=${USER_NAME}
+ARG USER_ID=1000
+
+RUN adduser \
+    --home /${USER_HOME_NAME} \
+    --disabled-password \
+    --uid ${USER_ID} \
+    ${USER_NAME}
+
+USER ${USER_NAME}

@@ -10,3 +10,8 @@ make run
 make build
 make stop
 ```
+
+# run roadrunner server
+```
+php artisan octane:start --host 0.0.0.0
+```

@@ -10,7 +10,10 @@ services:
         build:
             context: .
             dockerfile: ./docker/php-fpm/Dockerfile
+            args:
+                - USER_ID=${DOCKER_USER_ID:-1000}
         container_name: container-laravel-octane-roadrunner-php
+        user: ${DOCKER_CURRENT_USER:-test}
         working_dir: /app
         labels:
             - "traefik.enable=true"

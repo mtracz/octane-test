@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+    traefik-octane-test-proxy:
+        external: true
+
+services:
+
+    laravel-octane-swoole-php:
+        build:
+            context: .
+            dockerfile: ./docker/php-fpm/Dockerfile
+            args:
+                - USER_ID=${DOCKER_USER_ID:-1000}
+        container_name: container-laravel-octane-swoole-php
+        user: ${DOCKER_CURRENT_USER:-test}
+        working_dir: /app
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.laravel-octane-swoole.rule=Host(`laravel-octane-swoole.local`)"
+            - "traefik.http.routers.laravel-octane-swoole.entrypoints=http"
+        tty: true
+        networks:
+            - traefik-octane-test-proxy
+        expose:
+            - 8000
+        volumes:
+            - ./:/app
+            - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
