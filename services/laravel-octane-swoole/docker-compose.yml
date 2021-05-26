@@ -22,6 +22,8 @@ services:
         tty: true
         networks:
             - traefik-octane-test-proxy
+        ports:
+            - 7777:8000
         expose:
             - 8000
         volumes:

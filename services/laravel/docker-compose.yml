@@ -20,6 +20,8 @@ services:
         volumes:
             - ./:/app
             - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 888:80
         expose:
             - 80
 

@@ -13,5 +13,7 @@ make stop
 
 # run roadrunner server
 ```
-php artisan octane:start --host 0.0.0.0
+php artisan octane:start --host=0.0.0.0 --workers=4
+# or 
+composer serve
 ```
