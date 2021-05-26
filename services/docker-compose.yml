@@ -1,0 +1,7 @@
+version: "3.8"
+
+networks:
+    traefik-octane-test-proxy:
+        external: true
+
+#services:

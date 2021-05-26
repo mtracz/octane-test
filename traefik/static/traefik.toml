@@ -1,0 +1,12 @@
+[entryPoints]
+    [entryPoints.http]
+        address = ":80"
+
+[api]
+    insecure = true
+    dashboard = true
+
+[providers]
+    [providers.docker]
+        network = "traefik-octane-test-proxy"
+        exposedByDefault = false
