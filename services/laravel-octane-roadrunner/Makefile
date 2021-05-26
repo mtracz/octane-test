@@ -1,6 +1,6 @@
 .PHONY: shell
 shell:
-	docker-compose exec laravel-octane-php-fpm-nginx bash
+	docker-compose exec laravel-octane-roadrunner-php-fpm-nginx bash
 
 .PHONY: run
 run:
