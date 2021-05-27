@@ -39,3 +39,5 @@ services:
         volumes:
             - ./:/app
             - ./docker/php-fpm/php-ini-overrides.ini:/usr/local/etc/php/conf.d/99-overrides.ini
+#            uncomment for improve performance
+#            - ./docker/php-fpm/www.pool.conf:/usr/local/etc/php-fpm.d/zz-www.conf

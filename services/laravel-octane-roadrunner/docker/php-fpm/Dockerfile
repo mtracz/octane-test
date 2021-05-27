@@ -9,6 +9,7 @@ RUN apk --no-cache add \
     git \
     curl \
     && docker-php-ext-install \
+    opcache \
     sockets \
     pcntl
 

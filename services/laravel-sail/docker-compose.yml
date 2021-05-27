@@ -1,0 +1,27 @@
+version: '3'
+
+networks:
+    traefik-octane-test-proxy:
+        external: true
+
+services:
+    laravel.test:
+        build:
+            context: ./docker/8.0
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.laravel-sail.rule=Host(`laravel-sail.local`)"
+            - "traefik.http.routers.laravel-sail.entrypoints=http"
+        image: sail-8.0/app
+        expose:
+            - 80
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - traefik-octane-test-proxy

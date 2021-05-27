@@ -13,6 +13,8 @@
 |
 */
 
+use App\Http\Controllers\CollectionController;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -20,3 +22,5 @@ $router->get('/', function () use ($router) {
 $router->get('/a', function () {
     return response()->json("A");
 });
+
+$router->get('/b', "CollectionController");
