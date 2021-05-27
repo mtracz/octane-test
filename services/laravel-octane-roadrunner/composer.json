@@ -46,7 +46,7 @@
             "@php artisan key:generate --ansi"
         ],
         "serve": [
-            "@php artisan octane:start --host=0.0.0.0 --workers=4"
+            "@php artisan octane:start --host=0.0.0.0 --workers=8 --max-requests=1000000"
         ]
     },
     "extra": {
