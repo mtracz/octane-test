@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+    traefik-octane-test-proxy:
+        external: true
+
+services:
+    laravel-octane-roadrunner-sail.test:
+        build:
+            context: ./docker/8.0
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.laravel-octane-roadrunner-sail.rule=Host(`laravel-octane-roadrunner-sail.local`)"
+            - "traefik.http.routers.laravel-octane-roadrunner-sail.entrypoints=http"
+        image: sail-8.0/app
+        expose:
+            - 8000
+        ports:
+            - '${APP_PORT:-80}:8000'
+        environment:
+            WWWUSER: '${WWWUSER}'
+            LARAVEL_SAIL: 1
+        volumes:
+            - '.:/var/www/html'
+        networks:
+            - traefik-octane-test-proxy
